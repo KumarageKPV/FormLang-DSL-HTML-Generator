@@ -1,0 +1,28 @@
+form Registration {
+  meta author = "SE2062 Team";
+
+  section Personal_Details {
+    field full_Name: text required;
+    field email: email required pattern=".+@.+\..+";
+    field age: number min=18 max=99;
+    field birth_date: date required min="1900-01-01" max="2025-12-31";
+    field bio: textarea rows=4 cols=40;
+  }
+
+  section Preferences {
+    field gender: radio options=["Male", "Female", "Other"];
+    field country: dropdown options=["Sri Lanka", "India", "UK"];
+    field newsletter: checkbox default=true;
+  }
+
+  section Security {
+    field password: password required pattern=".{6,}";
+    field resume: file accept=".pdf,.docx" required;
+  }
+
+  validate {
+    if age < 18 {
+      error "You must be at least 18 years old.";
+    }
+  }
+}
